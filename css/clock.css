@@ -1,10 +1,142 @@
+*{
+  box-sizing: border-box;
+}
+
 @font-face {
     font-family: "digital";
-    src: url(DS-DIGIT.TTF);
+    src: url(../fonts/DS-DIGIB.TTF);
     font-style: normal;
     font-weight: normal;
   }
 
 
 
+  .clock{
+    display:flex;
+    background:#C5CBB7;
+    flex-direction: column;
+    width: 15%;
+    margin:0px auto;
+    
+   
+   
+   
+  }
+
+.clock  .display{
+  display: flex;
+  color: black;
+  font-family: "digital";
+  font-size: 100px;
+  justify-content: center;
+  margin: 0px !important;
+
+}
+
+
+.buttons{
+  display: flex;
+  justify-content: center;
+   width: auto;
+   height: auto;
+   margin: 25px;
+}
+
+.digit{
+  margin: 0px;
+}
+
+
+
+.touch{
+  margin: 5px;
+}
+
+
+
+
+@media screen and (max-width:1305px) {
   
+
+
+  .clock{
+    display:flex;
+    background:#C5CBB7;
+    flex-direction: column;
+    width: 25%;
+    margin:0px auto;
+    
+   
+   
+   
+  }
+
+.clock  .display{
+  display: flex;
+  color: black;
+  font-family: "digital";
+  font-size: 100px;
+  justify-content: center;
+  margin: 0px !important;
+
+}
+
+
+.buttons{
+  display: flex;
+  justify-content: center;
+   width: auto;
+   height: auto;
+   margin: 20px;
+}
+
+.digit{
+  margin: 0px;
+}
+
+}
+
+@media screen and (max-width:860px) {
+  
+
+
+  .clock{
+    display:flex;
+    background:#C5CBB7;
+    flex-direction: column;
+    width: 60%;
+    margin:0px auto;
+    
+   
+   
+   
+  }
+
+.clock  .display{
+  display: flex;
+  color: black;
+  font-family: "digital";
+  font-size: 100px;
+  justify-content: center;
+  margin: 0px !important;
+
+}
+
+
+.buttons{
+  display: flex;
+  justify-content: center;
+   width: auto;
+   height: auto;
+   margin: 20px;
+}
+
+.digit{
+  margin: 0px;
+}
+
+}
+
+
+
+
