@@ -18,9 +18,8 @@ var hora =
     : parseInt(localStorage.getItem("hora"));
 var segundoP = ":";
 
-var counterBottunStart = localStorage.getItem("counterBottunStart") == null
-? 0
-: parseInt(localStorage.getItem("counterBottunStart"));
+var counterBottunStart = 0;
+localStorage.setItem("counterBottunStart",counterBottunStart);
 
 var clock;
 var dHora = document.getElementById("hora");
