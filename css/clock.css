@@ -15,12 +15,9 @@
     display:flex;
     background:#C5CBB7;
     flex-direction: column;
-    width: 15%;
+    width: 50%;
     margin:0px auto;
-    
-   
-   
-   
+         
   }
 
 .clock  .display{
@@ -50,7 +47,26 @@
 
 .touch{
   margin: 5px;
+  background: #688b14;
+  padding: 10px;
+  border: white 1px;
+  transition: 10ms;
+  color: white;
+  border-radius: 40px;
 }
+
+
+.touch:hover{
+  background: #148b2e;
+  transform: scale(1.2);
+  
+}
+.touch:active{
+  background: #148b28;
+  transform: scale(0.9);
+  
+}
+
 
 
 
@@ -63,7 +79,7 @@
     display:flex;
     background:#C5CBB7;
     flex-direction: column;
-    width: 25%;
+    width: 75%;
     margin:0px auto;
     
    
@@ -96,7 +112,7 @@
 
 }
 
-@media screen and (max-width:860px) {
+@media screen and (max-width:360px) {
   
 
 
@@ -104,7 +120,7 @@
     display:flex;
     background:#C5CBB7;
     flex-direction: column;
-    width: 60%;
+    width: 90%;
     margin:0px auto;
     
    

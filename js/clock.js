@@ -1,11 +1,28 @@
-var milesima = 0;
-var segundo = 00;
-var minuto = 0;
-var hora = 0;
+'use strict';
+
+var milesima =
+  localStorage.getItem("milesima") == null
+    ? 0
+    : parseInt(localStorage.getItem("milesima"));
+var segundo =
+  localStorage.getItem("segundo") == null
+    ? 0
+    : parseInt(localStorage.getItem("segundo"));
+var minuto =
+  localStorage.getItem("minuto") == null
+    ? 0
+    : parseInt(localStorage.getItem("minuto"));
+var hora =
+  localStorage.getItem("hora") == null
+    ? 0
+    : parseInt(localStorage.getItem("hora"));
 var segundoP = ":";
 
+var counterBottunStart = localStorage.getItem("counterBottunStart") == null
+? 0
+: parseInt(localStorage.getItem("counterBottunStart"));
 
-
+var clock;
 var dHora = document.getElementById("hora");
 var dMinito = document.getElementById("minuto");
 var dSegundo = document.getElementById("segundo");
@@ -15,115 +32,108 @@ var botonStart = document.getElementById("start");
 var botonReset = document.getElementById("reset");
 var botonPause = document.getElementById("pause");
 
+//Verica valores 
+function checkout() {
+  if (localStorage.getItem("milesima") == null) {
+    localStorage.setItem("milesima", 0);
+    localStorage.setItem("segundo", 0);
+    localStorage.setItem("minuto", 0);
+    localStorage.setItem("hora", 0);
+  } else {
+    milesima = parseInt(localStorage.getItem("milesima"));
+    segundo = parseInt(localStorage.getItem("segundo"));
+    minuto = parseInt(localStorage.getItem("minuto"));
+    hora = parseInt(localStorage.getItem("hora"));
+  }
+  dSegundo.innerHTML = parseInt(localStorage.getItem("segundo"));
+  segundo;
+  dMilesima.innerHTML = parseInt(localStorage.getItem("milesima"));
+  dMinito.innerHTML = parseInt(localStorage.getItem("minuto"));
+  dHora.innerHTML = parseInt(localStorage.getItem("hora"));
+  
+}
 
-dHora.innerHTML = hora;
-dMinito.innerHTML = minuto;
-dSegundo.innerHTML = segundo;
-dMilesima.innerHTML = milesima;
-
-
+checkout();
 
 function startTime() {
-    if (localStorage.getItem("milesima") == null) {
-        localStorage.setItem("milesima", milesima);
-        localStorage.setItem("segundo", segundo);
-        localStorage.setItem("minuto", minuto);
-        localStorage.setItem("hora", hora)
-    }else{
-         milesima =parseInt(localStorage.getItem("milesima"));
-         segundo =parseInt(localStorage.getItem("segundo"));
-         minuto =parseInt(localStorage.getItem("minuto"));
-         hora =parseInt(localStorage.getItem("hora"));
-    }
+  checkout();
+  milesima = parseInt(localStorage.getItem("milesima")) + 1;
+  localStorage.setItem("milesima", milesima);
 
-
-    milesima = parseInt(localStorage.getItem("milesima")) + 1;
+  if (milesima == 10) {
+    segundo = segundo + 1;
+    milesima = 0;
+    localStorage.setItem("segundo", segundo);
     localStorage.setItem("milesima", milesima);
-    dMilesima.innerHTML = milesima;
-    console.log(milesima);
+  
 
-
-    if (milesima == 10) {
-        segundo = segundo + 1;
-        milesima = 0;
-        localStorage.setItem("segundo", segundo);
-        localStorage.setItem("milesima", milesima);
-        dSegundo.innerHTML = parseInt(localStorage.getItem("segundo"));
-        dMilesima.innerHTML =parseInt(localStorage.getItem("milesima"));
-       
-
-        if (segundo == 60) {
-            segundo = 0;
-            minuto = minuto + 1;
-            localStorage.setItem("segundo", segundo);
-            localStorage.setItem("milesima", milesima);
-            localStorage.setItem("minuto", minuto);
-            dSegundo.innerHTML = segundo;
-            dMilesima.innerHTML = milesima;
-            dMinito.innerHTML = minuto;
-
-
-        }
-
-        if (minuto == 60) {
-            hora = hora + 1;
-            segundo = 0;
-            minuto = 0;
-            localStorage.setItem("segundo", segundo);
-            localStorage.setItem("milesima", milesima);
-            localStorage.setItem("minuto", minuto);
-            localStorage.setItem("hora", hora);
-            dSegundo.innerHTML = parseInt(localStorage.getItem("segundo"));segundo;
-            dMilesima.innerHTML =parseInt(localStorage.getItem("milesima")); ;
-            dMinito.innerHTML =parseInt(localStorage.getItem("minuto")); ;
-            dHora.innerHTML = parseInt(localStorage.getItem("hora"));;
-
-
-        }
+    if (segundo == 60) {
+      segundo = 0;
+      minuto = minuto + 1;
+      localStorage.setItem("segundo", segundo);
+      localStorage.setItem("milesima", milesima);
+      localStorage.setItem("minuto", minuto);
+     
     }
 
+    if (minuto == 60) {
+      hora = hora + 1;
+      segundo = 0;
+      minuto = 0;
+      localStorage.setItem("segundo", segundo);
+      localStorage.setItem("milesima", milesima);
+      localStorage.setItem("minuto", minuto);
+      localStorage.setItem("hora", hora);
+      
+    }
+  }
 }
-
-
 
 function star() {
-    clock = setInterval(startTime, 100);
+
+    if(parseInt(localStorage.getItem("counterBottunStart"))==0){
+        localStorage.setItem("counterBottunStart" ,"1");
+        clock = setInterval(startTime, 100);
+    }else{
+        alert("Ya se inicio el contador");
+    }
+
+    console.log("star"+counterBottunStart);
+    
+   
 }
+
+
 
 
 botonStart.onclick = star;
 
-
-
-
-
-
 function reset() {
-    milesima = 0;
-    localStorage.setItem("milesima", milesima)
-    dMilesima.innerHTML = milesima;
+  milesima = 0;
+  localStorage.setItem("milesima", milesima);
+  dMilesima.innerHTML = milesima;
 
+  segundo = 0;
+  localStorage.setItem("segundo", segundo);
+  dSegundo.innerHTML = segundo;
 
-    segundo = 0;
-    localStorage.setItem("segundo", segundo)
-    dSegundo.innerHTML = segundo;
+  minuto = 0;
+  localStorage.setItem("minuto", minuto);
+  dSegundo.innerHTML = minuto;
 
-    minuto = 0;
-    localStorage.setItem("minuto", minuto)
-    dSegundo.innerHTML = minuto;
-
-    hora = 0;
-    localStorage.setItem("hora", hora)
-    hora.innerHTML = hora;
-
-    clearInterval(clock);
-
+  hora = 0;
+  localStorage.setItem("hora", hora);
+  dHora.innerHTML = hora;
+  localStorage.setItem("counterBottunStart", 0);
+  clearInterval(clock);
+  console.log("reset"+counterBottunStart)
 }
 
-function pause(){
-    clearInterval(clock);
+function pause() {
+    localStorage.setItem("counterBottunStart", 0);
+  clearInterval(clock);
+  console.log("pause"+counterBottunStart)
 }
-
 
 botonReset.onclick = reset;
 botonPause.onclick = pause;
