@@ -1,54 +1,54 @@
 "use strict";
 
 var clock;
-var dHora = document.getElementById("hora");
-var dMinito = document.getElementById("minuto");
-var dSegundo = document.getElementById("segundo");
-var dMilesima = document.getElementById("milesima");
-var segundoP = document.getElementById("segundoP");
-var botonStart = document.getElementById("start");
+var dHour = document.getElementById("hour");
+var dMinute = document.getElementById("minute");
+var dSecond = document.getElementById("second");
+var dThousandth = document.getElementById("thousandth");
+var secondP = document.getElementById("secondP");
+var buttonStart = document.getElementById("start");
 var botonReset = document.getElementById("reset");
 var botonPause = document.getElementById("pause");
 
-var milesima =
-  localStorage.getItem("milesima") == null
+var thousandth =
+  localStorage.getItem("thousandth") == null
     ? 0
-    : parseInt(localStorage.getItem("milesima"));
-var segundo =
-  localStorage.getItem("segundo") == null
+    : parseInt(localStorage.getItem("thousandth"));
+var second =
+  localStorage.getItem("second") == null
     ? 0
-    : parseInt(localStorage.getItem("segundo"));
-var minuto =
-  localStorage.getItem("minuto") == null
+    : parseInt(localStorage.getItem("second"));
+var minute =
+  localStorage.getItem("minute") == null
     ? 0
-    : parseInt(localStorage.getItem("minuto"));
-var hora =
-  localStorage.getItem("hora") == null
+    : parseInt(localStorage.getItem("minute"));
+var hour =
+  localStorage.getItem("hour") == null
     ? 0
-    : parseInt(localStorage.getItem("hora"));
-var segundoP = ":";
+    : parseInt(localStorage.getItem("hour"));
+var secondP = ":";
 
 var counterBottunStart = 0;
 localStorage.setItem("counterBottunStart", counterBottunStart);
 
 //Verica valores
 const checkout = () => {
-  if (localStorage.getItem("milesima") == null) {
-    localStorage.setItem("milesima", 0);
-    localStorage.setItem("segundo", 0);
-    localStorage.setItem("minuto", 0);
-    localStorage.setItem("hora", 0);
+  if (localStorage.getItem("thousandth") == null) {
+    localStorage.setItem("thousandth", 0);
+    localStorage.setItem("second", 0);
+    localStorage.setItem("minute", 0);
+    localStorage.setItem("hour", 0);
   } else {
-    milesima = parseInt(localStorage.getItem("milesima"));
-    segundo = parseInt(localStorage.getItem("segundo"));
-    minuto = parseInt(localStorage.getItem("minuto"));
-    hora = parseInt(localStorage.getItem("hora"));
+    thousandth = parseInt(localStorage.getItem("thousandth"));
+    second = parseInt(localStorage.getItem("second"));
+    minute = parseInt(localStorage.getItem("minute"));
+    hour = parseInt(localStorage.getItem("hour"));
   }
-  dSegundo.innerHTML = parseInt(localStorage.getItem("segundo"));
-  segundo;
-  dMilesima.innerHTML = parseInt(localStorage.getItem("milesima"));
-  dMinito.innerHTML = parseInt(localStorage.getItem("minuto"));
-  dHora.innerHTML = parseInt(localStorage.getItem("hora"));
+  dSecond.innerHTML = parseInt(localStorage.getItem("second"));
+  second;
+  dThousandth.innerHTML = parseInt(localStorage.getItem("thousandth"));
+  dMinute.innerHTML = parseInt(localStorage.getItem("minute"));
+  dHour.innerHTML = parseInt(localStorage.getItem("hour"));
 };
 
 
@@ -56,31 +56,31 @@ const checkout = () => {
 
 const  startTime=()=> {
   checkout();
-  milesima = parseInt(localStorage.getItem("milesima")) + 1;
-  localStorage.setItem("milesima", milesima);
+  thousandth = parseInt(localStorage.getItem("thousandth")) + 1;
+  localStorage.setItem("thousandth", thousandth);
 
-  if (milesima == 10) {
-    segundo = segundo + 1;
-    milesima = 0;
-    localStorage.setItem("segundo", segundo);
-    localStorage.setItem("milesima", milesima);
+  if (thousandth == 10) {
+    second = second + 1;
+    thousandth = 0;
+    localStorage.setItem("second", second);
+    localStorage.setItem("thousandth", thousandth);
 
-    if (segundo == 60) {
-      segundo = 0;
-      minuto = minuto + 1;
-      localStorage.setItem("segundo", segundo);
-      localStorage.setItem("milesima", milesima);
-      localStorage.setItem("minuto", minuto);
+    if (second == 60) {
+      second = 0;
+      minute = minute + 1;
+      localStorage.setItem("second", second);
+      localStorage.setItem("thousandth", thousandth);
+      localStorage.setItem("minute", minute);
     }
 
-    if (minuto == 60) {
-      hora = hora + 1;
-      segundo = 0;
-      minuto = 0;
-      localStorage.setItem("segundo", segundo);
-      localStorage.setItem("milesima", milesima);
-      localStorage.setItem("minuto", minuto);
-      localStorage.setItem("hora", hora);
+    if (minute == 60) {
+      hour = hour + 1;
+      second = 0;
+      minute = 0;
+      localStorage.setItem("second", second);
+      localStorage.setItem("thousandth", thousandth);
+      localStorage.setItem("minute", minute);
+      localStorage.setItem("hour", hour);
     }
   }
 }
@@ -99,21 +99,21 @@ const start=()=> {
 
 
 const reset=()=> {
-  milesima = 0;
-  localStorage.setItem("milesima", milesima);
-  dMilesima.innerHTML = milesima;
+  thousandth = 0;
+  localStorage.setItem("thousandth", thousandth);
+  dThousandth.innerHTML = thousandth;
 
-  segundo = 0;
-  localStorage.setItem("segundo", segundo);
-  dSegundo.innerHTML = segundo;
+  second = 0;
+  localStorage.setItem("second", second);
+  dSecond.innerHTML = second;
 
-  minuto = 0;
-  localStorage.setItem("minuto", minuto);
-  dSegundo.innerHTML = minuto;
+  minute = 0;
+  localStorage.setItem("minute", minute);
+  dSecond.innerHTML = minute;
 
-  hora = 0;
-  localStorage.setItem("hora", hora);
-  dHora.innerHTML = hora;
+  hour = 0;
+  localStorage.setItem("hour", hour);
+  dHour.innerHTML = hour;
   localStorage.setItem("counterBottunStart", 0);
   clearInterval(clock);
   console.log("reset" + counterBottunStart);
@@ -127,7 +127,7 @@ function pause() {
 
 
 
-botonStart.onclick = star;
+buttonStart.onclick = start;
 checkout();
 botonReset.onclick = reset;
 botonPause.onclick = pause;
