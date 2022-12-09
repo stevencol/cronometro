@@ -1,4 +1,14 @@
-'use strict';
+"use strict";
+
+var clock;
+var dHora = document.getElementById("hora");
+var dMinito = document.getElementById("minuto");
+var dSegundo = document.getElementById("segundo");
+var dMilesima = document.getElementById("milesima");
+var segundoP = document.getElementById("segundoP");
+var botonStart = document.getElementById("start");
+var botonReset = document.getElementById("reset");
+var botonPause = document.getElementById("pause");
 
 var milesima =
   localStorage.getItem("milesima") == null
@@ -19,20 +29,10 @@ var hora =
 var segundoP = ":";
 
 var counterBottunStart = 0;
-localStorage.setItem("counterBottunStart",counterBottunStart);
+localStorage.setItem("counterBottunStart", counterBottunStart);
 
-var clock;
-var dHora = document.getElementById("hora");
-var dMinito = document.getElementById("minuto");
-var dSegundo = document.getElementById("segundo");
-var dMilesima = document.getElementById("milesima");
-var segundoP = document.getElementById("segundoP");
-var botonStart = document.getElementById("start");
-var botonReset = document.getElementById("reset");
-var botonPause = document.getElementById("pause");
-
-//Verica valores 
-function checkout() {
+//Verica valores
+const checkout = () => {
   if (localStorage.getItem("milesima") == null) {
     localStorage.setItem("milesima", 0);
     localStorage.setItem("segundo", 0);
@@ -49,12 +49,12 @@ function checkout() {
   dMilesima.innerHTML = parseInt(localStorage.getItem("milesima"));
   dMinito.innerHTML = parseInt(localStorage.getItem("minuto"));
   dHora.innerHTML = parseInt(localStorage.getItem("hora"));
-  
-}
+};
 
-checkout();
 
-function startTime() {
+
+
+const  startTime=()=> {
   checkout();
   milesima = parseInt(localStorage.getItem("milesima")) + 1;
   localStorage.setItem("milesima", milesima);
@@ -64,7 +64,6 @@ function startTime() {
     milesima = 0;
     localStorage.setItem("segundo", segundo);
     localStorage.setItem("milesima", milesima);
-  
 
     if (segundo == 60) {
       segundo = 0;
@@ -72,7 +71,6 @@ function startTime() {
       localStorage.setItem("segundo", segundo);
       localStorage.setItem("milesima", milesima);
       localStorage.setItem("minuto", minuto);
-     
     }
 
     if (minuto == 60) {
@@ -83,31 +81,24 @@ function startTime() {
       localStorage.setItem("milesima", milesima);
       localStorage.setItem("minuto", minuto);
       localStorage.setItem("hora", hora);
-      
     }
   }
 }
 
-function star() {
+const start=()=> {
+  if (parseInt(localStorage.getItem("counterBottunStart")) == 0) {
+    localStorage.setItem("counterBottunStart", "1");
+    clock = setInterval(startTime, 100);
+  } else {
+    alert("Ya se inicio el contador");
+  }
 
-    if(parseInt(localStorage.getItem("counterBottunStart"))==0){
-        localStorage.setItem("counterBottunStart" ,"1");
-        clock = setInterval(startTime, 100);
-    }else{
-        alert("Ya se inicio el contador");
-    }
-
-    console.log("star"+counterBottunStart);
-    
-   
+  console.log("star" + counterBottunStart);
 }
 
 
 
-
-botonStart.onclick = star;
-
-function reset() {
+const reset=()=> {
   milesima = 0;
   localStorage.setItem("milesima", milesima);
   dMilesima.innerHTML = milesima;
@@ -125,14 +116,18 @@ function reset() {
   dHora.innerHTML = hora;
   localStorage.setItem("counterBottunStart", 0);
   clearInterval(clock);
-  console.log("reset"+counterBottunStart)
+  console.log("reset" + counterBottunStart);
 }
 
 function pause() {
-    localStorage.setItem("counterBottunStart", 0);
+  localStorage.setItem("counterBottunStart", 0);
   clearInterval(clock);
-  console.log("pause"+counterBottunStart)
+  console.log("pause" + counterBottunStart);
 }
 
+
+
+botonStart.onclick = star;
+checkout();
 botonReset.onclick = reset;
 botonPause.onclick = pause;
